@@ -102,3 +102,4 @@ ENV/
 
 .idea/
 sample_db.sqlite
+instance/settings.py
