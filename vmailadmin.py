@@ -5,11 +5,11 @@ from flask import Flask
 from flask_admin.contrib import sqla
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__, instance_relative_config=True)
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config.from_pyfile("settings.py")
+application = Flask(__name__, instance_relative_config=True)
+application.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+application.config.from_pyfile("settings.py")
 
-db = SQLAlchemy(app)
+db = SQLAlchemy(application)
 
 
 class Accounts(db.Model):
@@ -52,7 +52,7 @@ class DomainsAdmin(sqla.ModelView):
 
 
 # Create admin
-admin = admin.Admin(app, name="vmail admin", template_mode="bootstrap3")
+admin = admin.Admin(application, name="vmail admin", template_mode="bootstrap3")
 admin.add_view(AccountsAdmin(Accounts, db.session))
 admin.add_view(AliasesAdmin(Aliases, db.session))
 admin.add_view(DomainsAdmin(Domains, db.session))
@@ -62,4 +62,4 @@ if __name__ == "__main__":
     db.create_all()
 
     # Start app
-    app.run()
+    application.run()

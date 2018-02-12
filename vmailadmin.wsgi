@@ -1,1 +1,0 @@
-from vmailadmin import app as application
