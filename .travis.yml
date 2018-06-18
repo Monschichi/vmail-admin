@@ -9,5 +9,5 @@ install:
   - pip install coveralls pytest-cov
   - cp instance/settings.py.example instance/settings.py
 script:
-  - pytest --cov
+  - pytest --cov=vmailadmin
 after_success: coveralls
