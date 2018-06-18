@@ -20,9 +20,6 @@ class Accounts(db.Model):
     enabled = db.Column(db.Boolean, nullable=False, default=True)
     sendonly = db.Column(db.Boolean, nullable=False, default=False)
 
-    def __str__(self):
-        return self.desc
-
 
 class AccountsAdmin(sqla.ModelView):
     column_display_pk = True
@@ -59,7 +56,6 @@ admin.add_view(DomainsAdmin(Domains, db.session))
 
 if __name__ == "__main__":
     # Create DB
-    db.create_all()
-
+    db.create_all()  # pragma: no cover
     # Start app
-    application.run()
+    application.run()  # pragma: no cover
