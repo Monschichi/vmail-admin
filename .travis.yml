@@ -6,5 +6,6 @@ python:
 install:
   - pip install -r requirements.txt
   - pip install pytest
+  - cp instance/settings.py.example instance/settings.py
 script:
   - pytest

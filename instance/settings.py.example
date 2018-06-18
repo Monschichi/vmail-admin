@@ -1,2 +1,3 @@
 # http://docs.sqlalchemy.org/en/latest/core/engines.html#database-urls
 SQLALCHEMY_DATABASE_URI = "sqlite:///sample_db.sqlite"
+SECRET_KEY = "my super secret key"
