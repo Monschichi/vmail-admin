@@ -102,3 +102,6 @@ ENV/
 .idea/
 sample_db.sqlite
 instance/settings.py
+
+# pytest
+.pytest_cache/
