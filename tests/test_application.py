@@ -9,7 +9,8 @@ from vmailadmin import application, db
 
 
 def random_string(length=20):
-    return "".join(random.choices(string.ascii_lowercase + string.ascii_uppercase + string.digits, k=length))
+    return "".join(
+        random.choice(string.ascii_lowercase + string.ascii_uppercase + string.digits) for _ in range(length))
 
 
 @pytest.fixture
