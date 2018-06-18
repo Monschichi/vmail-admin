@@ -6,8 +6,8 @@ python:
 cache: pip
 install:
   - pip install -r requirements.txt
-  - pip install coveralls
+  - pip install coveralls pytest-cov
   - cp instance/settings.py.example instance/settings.py
 script:
-  - pytest
+  - pytest --cov
 after_success: coveralls
