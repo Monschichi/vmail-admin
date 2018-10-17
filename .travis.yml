@@ -1,15 +1,13 @@
 ---
 language: python
-dist: xenial
-python:
-  - "3.5"
-  - "3.6"
-  - "3.7"
+dist: bionic
+python: "3.7"
 cache: pip
 install:
   - pip install -r requirements.txt
-  - pip install coveralls pytest-cov
+  - pip install coveralls pytest-cov codeclimate-test-reporter
   - cp instance/settings.py.example instance/settings.py
 script:
   - pytest --cov=vmailadmin
+  - codeclimate-test-reporter --file .coverage
 after_success: coveralls
