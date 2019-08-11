@@ -19,7 +19,10 @@ We use a [virtual-env](https://docs.python.org/3/library/venv.html) to manage ne
 root@example /var/www/vmail-admin # python3 -m venv .venv
 root@example /var/www/vmail-admin # . .venv/bin/activate
 (.venv) root@example /var/www/vmail-admin # pip install -r requirements.txt 
-``` 
+```
+
+### settings.py
+Do not forget to create a `instance/settings.py` with your configuration. You can use `instance/settings.py.example` as a template. 
 
 ### nginx
 /etc/nginx/nginx.conf:
