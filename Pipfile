@@ -7,4 +7,4 @@ Flask-Admin = ">=1.5.0"
 Flask-SQLAlchemy = ">=2.4.0"
 
 [scripts]
-test = "cp instance/settings.py.example instance/settings.py; pytest --cov=vmailadmin"
+test = "pytest --cov=vmailadmin"

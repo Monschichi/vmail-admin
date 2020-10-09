@@ -14,6 +14,12 @@ jobs:
         with:
           command: install -d
 
+      - name: copy settings example
+        uses: canastro/copy-file-action@master
+        with:
+          source: "instance/settings.py.example"
+          target: "instance/settings.py"
+
       - name: Test
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
