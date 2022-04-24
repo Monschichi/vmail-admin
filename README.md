@@ -2,6 +2,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/63428d0d453b592b15f0/maintainability)](https://codeclimate.com/github/Monschichi/vmail-admin/maintainability)
 [![Coverage Status](https://coveralls.io/repos/github/Monschichi/vmail-admin/badge.svg?branch=master)](https://coveralls.io/github/Monschichi/vmail-admin?branch=master)
 [![test](https://github.com/Monschichi/vmail-admin/actions/workflows/test.yml/badge.svg)](https://github.com/Monschichi/vmail-admin/actions/workflows/test.yml)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Monschichi/vmail-admin/master.svg)](https://results.pre-commit.ci/latest/github/Monschichi/vmail-admin/master)
 
 This is a web interface for managing virtual mailboxes.
 
@@ -11,18 +12,18 @@ In this setup we assume the use of sqlite as database, other databases work as w
 
 ### folders
 Sqlite is stored in `/home/sqlite/mail`, the user which runs the wsgi must have write access, postfix and dovecot need read access. E.g. `0755` with `www-data` as owner works fine.
-This git repository is cloned to `/var/www/vmail-admin`. 
+This git repository is cloned to `/var/www/vmail-admin`.
 
 ### venv
 We use a [virtual-env](https://docs.python.org/3/library/venv.html) to manage needed python libraries.
 ```shell script
 root@example /var/www/vmail-admin # python3 -m venv .venv
 root@example /var/www/vmail-admin # . .venv/bin/activate
-(.venv) root@example /var/www/vmail-admin # pip install -r requirements.txt 
+(.venv) root@example /var/www/vmail-admin # pip install -r requirements.txt
 ```
 
 ### settings.py
-Do not forget to create a `instance/settings.py` with your configuration. You can use `instance/settings.py.example` as a template. 
+Do not forget to create a `instance/settings.py` with your configuration. You can use `instance/settings.py.example` as a template.
 
 ### nginx
 /etc/nginx/nginx.conf:
@@ -86,7 +87,7 @@ submission inet n       -       n       -       -       smtpd
 
 /etc/postfix/main.cf:
 ```
-mydestination = 
+mydestination =
 smtpd_recipient_restrictions = permit_mynetworks
                                check_recipient_access sqlite:/etc/postfix/sql/recipient-access.cf
 virtual_transport = lmtp:unix:private/dovecot-lmtp
@@ -95,7 +96,7 @@ virtual_mailbox_maps = sqlite:/etc/postfix/sql/accounts.cf
 virtual_mailbox_domains = sqlite:/etc/postfix/sql/domains.cf
 local_recipient_maps = $virtual_mailbox_maps
 alias_database =
-alias_maps = 
+alias_maps =
 ```
 
 /etc/postfix/sql/accounts.cf:
@@ -173,7 +174,7 @@ userdb {
 ```
 driver = sqlite
 connect = /home/sqlite/mail
-default_pass_scheme = SHA512-CRYPT 
+default_pass_scheme = SHA512-CRYPT
 
 password_query = SELECT username AS user, domain, password FROM accounts WHERE username = '%n' AND domain = '%d' and enabled = 1;
 user_query = SELECT '*:storage=0M' AS quota_rule FROM accounts WHERE username = '%n' AND domain = '%d' AND sendonly = 0;
