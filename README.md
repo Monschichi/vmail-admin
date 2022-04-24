@@ -1,9 +1,7 @@
 # vmail-admin
-[![Updates](https://pyup.io/repos/github/Monschichi/vmail-admin/shield.svg)](https://pyup.io/repos/github/Monschichi/vmail-admin/)
-[![Python 3](https://pyup.io/repos/github/Monschichi/vmail-admin/python-3-shield.svg)](https://pyup.io/repos/github/Monschichi/vmail-admin/)
 [![Maintainability](https://api.codeclimate.com/v1/badges/63428d0d453b592b15f0/maintainability)](https://codeclimate.com/github/Monschichi/vmail-admin/maintainability)
-[![Build Status](https://travis-ci.org/Monschichi/vmail-admin.svg?branch=master)](https://travis-ci.org/Monschichi/vmail-admin)
 [![Coverage Status](https://coveralls.io/repos/github/Monschichi/vmail-admin/badge.svg?branch=master)](https://coveralls.io/github/Monschichi/vmail-admin?branch=master)
+[![test](https://github.com/Monschichi/vmail-admin/actions/workflows/test.yml/badge.svg)](https://github.com/Monschichi/vmail-admin/actions/workflows/test.yml)
 
 This is a web interface for managing virtual mailboxes.
 
@@ -181,6 +179,3 @@ password_query = SELECT username AS user, domain, password FROM accounts WHERE u
 user_query = SELECT '*:storage=0M' AS quota_rule FROM accounts WHERE username = '%n' AND domain = '%d' AND sendonly = 0;
 iterate_query = SELECT username, domain FROM accounts where sendonly = 0;
 ```
-
-## Credits
-Dependencies scanned by [PyUp.io](https://pyup.io/)
