@@ -11,14 +11,18 @@ from vmailadmin import db
 
 def random_string(length=20):
     return ''.join(
-        random.choice(string.ascii_lowercase + string.ascii_uppercase + string.digits) for _ in range(length)
+        random.choice(
+            string.ascii_lowercase +
+            string.ascii_uppercase + string.digits,
+        )
+        for _ in range(length)
     )
 
 
 @pytest.fixture
 def client():
     db_fd, application.config['DATABASE'] = tempfile.mkstemp()
-    application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{file}'.format(file=application.config['DATABASE'])
+    application.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{application.config["DATABASE"]}'
     application.config['TESTING'] = True
     client = application.test_client()
 
@@ -48,22 +52,21 @@ def test_accounts(client):
     password = random_string()
     domain = random_string()
     rv = client.post(
-        '/admin/accounts/new/', data=dict(
+        '/admin/accounts/new/',
+        data=dict(
             username=username,
             password=password,
             domain=domain,
             enabled='y',
             url='/admin/accounts/',
-        ), follow_redirects=True,
-    )
+        ), follow_redirects=True, )
     assert rv.status_code == 200
     assert username in rv.data.decode('ascii')
     assert password in rv.data.decode('ascii')
     assert domain in rv.data.decode('ascii')
     rv = client.post(
         '/admin/accounts/delete/', data=dict(
-            id='{username},{domain}'.format(username=username, domain=domain),
-            url='/admin/accounts/',
+            id=f'{username},{domain}', url='/admin/accounts/',
         ), follow_redirects=True,
     )
     assert rv.status_code == 200
@@ -78,13 +81,8 @@ def test_aliases(client):
     address = random_string()
     goto = random_string()
     rv = client.post(
-        '/admin/aliases/new/', data=dict(
-            address=address,
-            goto=goto,
-            active='y',
-            url='/admin/aliases/',
-        ), follow_redirects=True,
-    )
+        '/admin/aliases/new/', data=dict(address=address, goto=goto, active='y', url='/admin/aliases/'),
+        follow_redirects=True, )
     assert rv.status_code == 200
     assert address in rv.data.decode('ascii')
     assert goto in rv.data.decode('ascii')

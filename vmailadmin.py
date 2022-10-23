@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
-import flask_admin as admin
 from flask import Flask
+from flask_admin import Admin
 from flask_admin.contrib import sqla
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.ext.declarative import DeclarativeMeta
+
 
 application = Flask(__name__, instance_relative_config=True)
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 application.config.from_pyfile('settings.py')
 
 db = SQLAlchemy(application)
+BaseModel: DeclarativeMeta = db.Model
 
 
-class Accounts(db.Model):
+class Accounts(BaseModel):
     __tablename__ = 'accounts'
     username = db.Column(db.String(64), primary_key=True, nullable=False)
     domain = db.Column(db.String(255), primary_key=True, nullable=False)
@@ -25,7 +28,7 @@ class AccountsAdmin(sqla.ModelView):
     form_columns = ['username', 'domain', 'password', 'enabled', 'sendonly']
 
 
-class Aliases(db.Model):
+class Aliases(BaseModel):
     __tablename__ = 'aliases'
     address = db.Column(db.String(320), primary_key=True, nullable=False)
     goto = db.Column(db.String(320), nullable=False)
@@ -37,7 +40,7 @@ class AliasesAdmin(sqla.ModelView):
     form_columns = ['address', 'goto', 'active']
 
 
-class Domains(db.Model):
+class Domains(BaseModel):
     __tablename__ = 'domains'
     domain = db.Column(db.String(255), primary_key=True, nullable=False)
 
@@ -48,7 +51,10 @@ class DomainsAdmin(sqla.ModelView):
 
 
 # Create admin
-admin = admin.Admin(application, name='vmail admin', template_mode='bootstrap3')
+admin = Admin(
+    application, name='vmail admin',
+    template_mode='bootstrap3',
+)
 admin.add_view(AccountsAdmin(Accounts, db.session))
 admin.add_view(AliasesAdmin(Aliases, db.session))
 admin.add_view(DomainsAdmin(Domains, db.session))
