@@ -1,13 +1,13 @@
 attrs==22.2.0
 cfgv==3.3.1
-coverage==7.0.3
+coverage==7.0.5
 distlib==0.3.6
 exceptiongroup==1.1.0
 filelock==3.9.0
 identify==2.5.13
-iniconfig==1.1.1
+iniconfig==2.0.0
 nodeenv==1.7.0
-packaging==22.0
+packaging==23.0
 platformdirs==2.6.2
 pluggy==1.0.0
 pre-commit==2.21.0
@@ -15,7 +15,7 @@ pytest==7.2.0
 pytest-cov==4.0.0
 PyYAML==6.0
 requirements-tools==2.1.0
-setuptools==65.6.3
+setuptools==65.7.0
 toml==0.10.2
 tomli==2.0.1
 virtualenv==20.17.1
