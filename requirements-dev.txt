@@ -8,7 +8,7 @@ identify==2.5.17
 iniconfig==2.0.0
 nodeenv==1.7.0
 packaging==23.0
-platformdirs==2.6.2
+platformdirs==3.0.0
 pluggy==1.0.0
 pre-commit==3.0.4
 pytest==7.2.1
