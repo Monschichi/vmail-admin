@@ -10,4 +10,4 @@ MarkupSafe==2.1.2
 SQLAlchemy==1.4.46
 Werkzeug==2.2.3
 WTForms==3.0.1
-zipp==3.13.0
+zipp==3.14.0
