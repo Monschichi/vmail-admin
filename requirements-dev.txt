@@ -2,7 +2,7 @@ attrs==22.2.0
 cfgv==3.3.1
 coverage==7.2.1
 distlib==0.3.6
-exceptiongroup==1.1.0
+exceptiongroup==1.1.1
 filelock==3.9.0
 identify==2.5.20
 iniconfig==2.0.0
