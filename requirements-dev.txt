@@ -18,4 +18,4 @@ requirements-tools==2.1.0
 setuptools==67.6.0
 toml==0.10.2
 tomli==2.0.1
-virtualenv==20.20.0
+virtualenv==20.21.0
