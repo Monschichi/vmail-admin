@@ -4,7 +4,7 @@ coverage==7.2.2
 distlib==0.3.6
 exceptiongroup==1.1.1
 filelock==3.10.3
-identify==2.5.21
+identify==2.5.22
 iniconfig==2.0.0
 nodeenv==1.7.0
 packaging==23.0
