@@ -9,6 +9,6 @@ Jinja2==3.1.2
 MarkupSafe==2.1.2
 SQLAlchemy==2.0.10
 typing-extensions==4.5.0
-Werkzeug==2.2.3
+Werkzeug==2.3.0
 WTForms==3.0.1
 zipp==3.15.0
