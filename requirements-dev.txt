@@ -9,7 +9,7 @@ nodeenv==1.8.0
 packaging==23.1
 platformdirs==3.2.0
 pluggy==1.0.0
-pre-commit==3.3.1
+pre-commit==3.3.2
 pytest==7.3.1
 pytest-cov==4.0.0
 PyYAML==6.0
