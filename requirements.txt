@@ -12,4 +12,4 @@ SQLAlchemy==2.0.16
 typing-extensions==4.7.1
 Werkzeug==2.3.6
 WTForms==3.0.1
-zipp==3.16.1
+zipp==3.16.2
