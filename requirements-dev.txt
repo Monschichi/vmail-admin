@@ -1,6 +1,6 @@
 cfgv==3.3.1
 coverage==7.2.7
-distlib==0.3.6
+distlib==0.3.7
 exceptiongroup==1.1.2
 filelock==3.12.2
 identify==2.5.24
