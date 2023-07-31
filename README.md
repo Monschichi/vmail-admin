@@ -25,6 +25,12 @@ root@example /var/www/vmail-admin # . .venv/bin/activate
 ### settings.py
 Do not forget to create a `instance/settings.py` with your configuration. You can use `instance/settings.py.example` as a template.
 
+### database
+After configuring your database in `instance/settings.py`, you need to set up/update your database:
+```shell script
+(.venv) root@example /var/www/vmail-admin # flask db upgrade
+```
+
 ### nginx
 /etc/nginx/nginx.conf:
 ```
@@ -89,6 +95,7 @@ submission inet n       -       n       -       -       smtpd
 ```
 mydestination =
 smtpd_recipient_restrictions = permit_mynetworks
+                               check_recipient_access sqlite:/etc/postfix/sql/denied-recipients.cf
                                check_recipient_access sqlite:/etc/postfix/sql/recipient-access.cf
 virtual_transport = lmtp:unix:private/dovecot-lmtp
 virtual_alias_maps = sqlite:/etc/postfix/sql/aliases.cf
@@ -117,7 +124,9 @@ additional_conditions = and active = 1
 /etc/postfix/sql/domains.cf:
 ```
 dbpath = /home/sqlite/mail
-query = SELECT domain FROM domains WHERE domain='%s'
+table = domains
+select_field = domain
+where_field = domain
 ```
 
 /etc/postfix/sql/recipient-access.cf:
@@ -131,6 +140,13 @@ query = select case when sendonly = 1 then 'REJECT' else 'OK' end AS access from
 dbpath = /home/sqlite/mail
 query = select username || '@' || domain as 'owns' from accounts where username = '%u' AND domain = '%d' and enabled = 1 union select goto AS 'owns' from aliases where address = '%u@%d' and active = 1;
 ```
+
+/etc/postfix/sql/denied-recipients.cf:
+```
+dbpath = /home/sqlite/mail
+query = select 'REJECT' AS access from deniedrecipients where username = '%u' and domain = '%d' LIMIT 1;
+```
+
 
 ### dovecot
 /etc/dovecot/dovecot.conf:
