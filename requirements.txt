@@ -1,4 +1,4 @@
-blinker==1.6.2
+blinker==1.6.3
 click==8.1.7
 flask==3.0.0
 Flask-Admin==1.6.1
