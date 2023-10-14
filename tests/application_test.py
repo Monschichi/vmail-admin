@@ -1,7 +1,5 @@
-import os
 import random
 import string
-import tempfile
 
 import pytest
 
@@ -21,18 +19,13 @@ def random_string(length=20):
 
 @pytest.fixture
 def client():
-    db_fd, application.config['DATABASE'] = tempfile.mkstemp()
-    application.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{application.config["DATABASE"]}'
     application.config['TESTING'] = True
     client = application.test_client()
-
     with application.app_context():
+        db.drop_all()
         db.create_all()
-
-    yield client
-
-    os.close(db_fd)
-    os.unlink(application.config['DATABASE'])
+        yield client
+        db.drop_all()
 
 
 def test_slash(client):
@@ -116,4 +109,30 @@ def test_domains(client):
         ), follow_redirects=True,
     )
     assert rv.status_code == 200
+    assert domain not in rv.data.decode('ascii')
+
+
+def test_deniedrecipients(client):
+    rv = client.get('/admin/deniedrecipients/')
+    assert rv.status_code == 200
+    username = random_string()
+    domain = random_string()
+    rv = client.post(
+        '/admin/deniedrecipients/new/', data=dict(
+            username=username,
+            domain=domain,
+            url='/admin/deniedrecipients/',
+        ), follow_redirects=True,
+    )
+    assert rv.status_code == 200
+    assert username in rv.data.decode('ascii')
+    assert domain in rv.data.decode('ascii')
+    rv = client.post(
+        '/admin/deniedrecipients/delete/', data=dict(
+            id=f'{username},{domain}',
+            url='/admin/deniedrecipients/',
+        ), follow_redirects=True,
+    )
+    assert rv.status_code == 200
+    assert username not in rv.data.decode('ascii')
     assert domain not in rv.data.decode('ascii')

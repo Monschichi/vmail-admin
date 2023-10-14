@@ -1,7 +1,6 @@
 ---
 name: test
 on:
-  push:
   pull_request:
 
 jobs:
@@ -24,4 +23,12 @@ jobs:
         run: cp instance/settings.py.example instance/settings.py
 
       - name: Run unit tests
-        run: python -m pytest --cov=vmailadmin
+        run: python -m pytest --cov=vmailadmin --junitxml=pytest.xml --cov-report=term-missing:skip-covered | tee pytest-coverage.txt
+
+      - name: Pytest coverage comment
+        uses: MishaKav/pytest-coverage-comment@v1.1.47
+        with:
+          pytest-coverage-path: ./pytest-coverage.txt
+          junitxml-path: ./pytest.xml
+          unique-id-for-comment: ${{ matrix.python-version }}
+          junitxml-title: ${{ matrix.python-version }}
