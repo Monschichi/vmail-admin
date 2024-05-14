@@ -14,4 +14,4 @@ pytest-cov==5.0.0
 PyYAML==6.0.1
 requirements-tools==2.1.0
 setuptools==69.5.1
-virtualenv==20.26.1
+virtualenv==20.26.2
