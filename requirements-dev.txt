@@ -1,5 +1,5 @@
 cfgv==3.4.0
-coverage==7.5.2
+coverage==7.5.3
 distlib==0.3.8
 filelock==3.14.0
 identify==2.5.36
