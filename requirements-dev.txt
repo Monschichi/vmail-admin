@@ -5,7 +5,7 @@ filelock==3.14.0
 identify==2.5.36
 iniconfig==2.0.0
 nodeenv==1.9.1
-packaging==24.0
+packaging==24.1
 platformdirs==4.2.2
 pluggy==1.5.0
 pre-commit==3.7.1
