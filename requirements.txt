@@ -1,4 +1,4 @@
-alembic==1.13.1
+alembic==1.13.2
 blinker==1.8.2
 click==8.1.7
 flask==3.0.3
