@@ -1,4 +1,0 @@
-Flask
-Flask-Admin
-Flask-Migrate
-Flask-SQLAlchemy
