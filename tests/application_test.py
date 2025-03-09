@@ -46,21 +46,25 @@ def test_accounts(client):
     domain = random_string()
     rv = client.post(
         '/admin/accounts/new/',
-        data=dict(
-            username=username,
-            password=password,
-            domain=domain,
-            enabled='y',
-            url='/admin/accounts/',
-        ), follow_redirects=True, )
+        data={
+            'username': username,
+            'password': password,
+            'domain': domain,
+            'enabled': 'y',
+            'url': '/admin/accounts/',
+        },
+    )
     assert rv.status_code == 200
     assert username in rv.data.decode('ascii')
     assert password in rv.data.decode('ascii')
     assert domain in rv.data.decode('ascii')
     rv = client.post(
-        '/admin/accounts/delete/', data=dict(
-            id=f'{username},{domain}', url='/admin/accounts/',
-        ), follow_redirects=True,
+        '/admin/accounts/delete/',
+        data={
+            'id': f'{username},{domain}',
+            'url': '/admin/accounts/',
+        },
+        follow_redirects=True,
     )
     assert rv.status_code == 200
     assert username not in rv.data.decode('ascii')
@@ -74,16 +78,24 @@ def test_aliases(client):
     address = random_string()
     goto = random_string()
     rv = client.post(
-        '/admin/aliases/new/', data=dict(address=address, goto=goto, active='y', url='/admin/aliases/'),
-        follow_redirects=True, )
+        '/admin/aliases/new/',
+        data={
+            'address': address,
+            'goto': goto,
+            'active': 'y',
+            'url': '/admin/aliases/',
+        },
+    )
     assert rv.status_code == 200
     assert address in rv.data.decode('ascii')
     assert goto in rv.data.decode('ascii')
     rv = client.post(
-        '/admin/aliases/delete/', data=dict(
-            id=address,
-            url='/admin/aliases/',
-        ), follow_redirects=True,
+        '/admin/aliases/delete/',
+        data={
+            'id': address,
+            'url': '/admin/aliases/',
+        },
+        follow_redirects=True,
     )
     assert rv.status_code == 200
     assert address not in rv.data.decode('ascii')
@@ -95,18 +107,21 @@ def test_domains(client):
     assert rv.status_code == 200
     domain = random_string()
     rv = client.post(
-        '/admin/domains/new/', data=dict(
-            domain=domain,
-            url='/admin/domains/',
-        ), follow_redirects=True,
+        '/admin/domains/new/',
+        data={
+            'domain': domain,
+            'url': '/admin/domains/',
+        },
     )
     assert rv.status_code == 200
     assert domain in rv.data.decode('ascii')
     rv = client.post(
-        '/admin/domains/delete/', data=dict(
-            id=domain,
-            url='/admin/aliases/',
-        ), follow_redirects=True,
+        '/admin/domains/delete/',
+        data={
+            'id': domain,
+            'url': '/admin/aliases/',
+        },
+        follow_redirects=True,
     )
     assert rv.status_code == 200
     assert domain not in rv.data.decode('ascii')
@@ -118,20 +133,23 @@ def test_deniedrecipients(client):
     username = random_string()
     domain = random_string()
     rv = client.post(
-        '/admin/deniedrecipients/new/', data=dict(
-            username=username,
-            domain=domain,
-            url='/admin/deniedrecipients/',
-        ), follow_redirects=True,
+        '/admin/deniedrecipients/new/',
+        data={
+            'username': username,
+            'domain': domain,
+            'url': '/admin/deniedrecipients/',
+        },
     )
     assert rv.status_code == 200
     assert username in rv.data.decode('ascii')
     assert domain in rv.data.decode('ascii')
     rv = client.post(
-        '/admin/deniedrecipients/delete/', data=dict(
-            id=f'{username},{domain}',
-            url='/admin/deniedrecipients/',
-        ), follow_redirects=True,
+        '/admin/deniedrecipients/delete/',
+        data={
+            'id': f'{username},{domain}',
+            'url': '/admin/deniedrecipients/',
+        },
+        follow_redirects=True,
     )
     assert rv.status_code == 200
     assert username not in rv.data.decode('ascii')

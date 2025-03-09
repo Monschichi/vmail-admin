@@ -1,6 +1,4 @@
 # vmail-admin
-[![Maintainability](https://api.codeclimate.com/v1/badges/63428d0d453b592b15f0/maintainability)](https://codeclimate.com/github/Monschichi/vmail-admin/maintainability)
-[![Coverage Status](https://coveralls.io/repos/github/Monschichi/vmail-admin/badge.svg?branch=master)](https://coveralls.io/github/Monschichi/vmail-admin?branch=master)
 [![test](https://github.com/Monschichi/vmail-admin/actions/workflows/test.yml/badge.svg)](https://github.com/Monschichi/vmail-admin/actions/workflows/test.yml)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Monschichi/vmail-admin/master.svg)](https://results.pre-commit.ci/latest/github/Monschichi/vmail-admin/master)
 
